@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Rabia Malik, React Native Developer in Islamabad. iOS and Android apps with TypeScript and Redux.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Rabia Malik Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: large left-set type, then each app gets a drawing of the hardest thing it does: a scanned receipt, an RFID read, a compass. */
+:root {
+  --bg: #eef2ee;
+  --surface: #dfe7e1;
+  --ink: #13211c;
+  --muted: #51625a;
+  --line: #bfccc4;
+  --accent: #0c6652;
+  --signal: #b87400;
+  --paper: #fbfcfa;
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body: "Figtree", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", Menlo, Consolas, monospace;
+  font-size: 17px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #0f1714; --surface: #18241f; --ink: #e8f0ec; --muted: #9fb0a8; --line: #2e3f38; --accent: #62d2b6; --signal: #f0bb4a; --paper: #243229; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #0f1714; --surface: #18241f; --ink: #e8f0ec; --muted: #9fb0a8; --line: #2e3f38; --accent: #62d2b6; --signal: #f0bb4a; --paper: #243229; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 1rem; line-height: 1.55; }
+.wrap {
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 720px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
+a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 3px; }
+a:hover { color: var(--accent); text-decoration-color: currentColor; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; }
+.label { font-family: var(--mono); font-size: .72rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+nav .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1.5rem; padding-block: 1.1rem; }
+nav .name { font-family: var(--display); font-weight: 700; text-decoration: none; }
+nav ul { display: flex; flex-wrap: wrap; gap: .2rem 1.2rem; list-style: none; margin: 0; padding: 0; font-size: .92rem; }
+
+.hero .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 3.5rem; }
+h1 { font-size: clamp(2.5rem, 7.4vw, 5.2rem); font-weight: 700; line-height: 1.02; letter-spacing: -.025em; max-width: 15em; }
+h1 em { font-style: normal; color: var(--accent); }
+.lede { font-size: 1.16rem; max-width: 38rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; }
+.btn { display: inline-block; padding: .62rem 1.05rem; border: 1.5px solid var(--ink); font-weight: 600; font-size: .95rem; text-decoration: none; }
+.btn:hover { background: var(--ink); color: var(--bg); }
+.btn.primary { background: var(--ink); color: var(--bg); }
+.btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+.facts { border-block: 1px solid var(--line); }
+.facts dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: 1rem 2rem; margin: 0; padding-block: 1.3rem; }
+.facts dt { font-family: var(--display); font-size: 1.9rem; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.facts dd { margin: .15rem 0 0; color: var(--muted); font-size: .92rem; }
+
+section > .wrap { padding-block: 3.5rem; display: grid; gap: 2rem; }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 700; letter-spacing: -.015em; line-height: 1.1; }
+
+.apps { display: grid; gap: 3.5rem; }
+.app { display: grid; gap: 1.25rem 2.5rem; align-items: start; }
+@media (min-width: 780px) {
+  .app { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+}
+.tile { background: var(--surface); padding: 1.25rem; }
+.tile svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.app-body { display: grid; gap: .8rem; min-width: 0; }
+.app h3 { font-size: 1.9rem; font-weight: 700; line-height: 1.1; letter-spacing: -.01em; }
+.who { color: var(--muted); font-size: .95rem; }
+.app ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .32rem; }
+li::marker { color: var(--accent); }
+.stack-line { font-family: var(--mono); font-size: .76rem; color: var(--muted); line-height: 1.6; }
+.stores { display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; font-weight: 600; font-size: .95rem; }
+
+svg text { font-family: var(--mono); font-weight: 500; }
+.s-paper { fill: var(--paper); stroke: var(--line); stroke-width: 1.5; }
+.s-ink { fill: var(--ink); }
+.s-muted { fill: var(--muted); }
+.s-line { stroke: var(--muted); stroke-width: 3; stroke-linecap: round; fill: none; }
+.s-accent { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; fill: none; }
+.s-accent-fill { fill: var(--accent); }
+.s-signal { stroke: var(--signal); stroke-width: 2.5; stroke-linecap: round; fill: none; }
+.s-signal-fill { fill: var(--signal); }
+.s-ring { stroke: var(--line); stroke-width: 2; fill: none; }
+.bg-fill { fill: var(--surface); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .scan { animation: scan 4.2s ease-in-out infinite alternate; }
+  @keyframes scan { from { transform: translateY(0); } to { transform: translateY(112px); } }
+  .wave { animation: pulse 2.6s ease-out infinite; }
+  .wave.b { animation-delay: .3s; }
+  .wave.c { animation-delay: .6s; }
+  @keyframes pulse { 0%, 100% { opacity: .3; } 30% { opacity: 1; } }
+  .needle { transform-box: view-box; transform-origin: 120px 90px; animation: settle 6s ease-in-out infinite alternate; }
+  @keyframes settle { from { transform: rotate(-16deg); } to { transform: rotate(24deg); } }
+}
+
+.band { background: var(--surface); }
+.two { display: grid; gap: 1.5rem 3rem; }
+@media (min-width: 780px) { .two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.two h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.2; }
+.two article { display: grid; gap: .35rem; align-content: start; }
+
+.timeline { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.timeline li { display: grid; gap: .1rem 1.5rem; padding-block: .85rem; border-top: 1px solid var(--line); }
+.timeline li:last-child { border-bottom: 1px solid var(--line); }
+@media (min-width: 640px) { .timeline li { grid-template-columns: 11rem minmax(0, 1fr); } }
+.when { font-family: var(--mono); font-size: .8rem; color: var(--muted); padding-top: .2rem; font-variant-numeric: tabular-nums; }
+.timeline b { font-family: var(--display); font-size: 1.08rem; font-weight: 700; }
+
+.skills { display: grid; gap: 1.25rem 2.5rem; margin: 0; }
+@media (min-width: 640px) { .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.skills div { min-width: 0; }
+.skills dd { margin: .25rem 0 0; }
+
+.ai { max-width: 42rem; display: grid; gap: .8rem; }
+
+.contact .wrap { padding-block: 3.5rem 4rem; display: grid; gap: 1.2rem; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
+.mail span { font-family: var(--display); font-size: clamp(1.25rem, 4.6vw, 2.2rem); font-weight: 700; overflow-wrap: anywhere; min-width: 0; }
+button { font: inherit; font-size: .88rem; font-weight: 600; background: none; color: var(--ink); border: 1.5px solid var(--ink); padding: .32rem .7rem; cursor: pointer; }
+button:hover { background: var(--ink); color: var(--bg); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="name" href="#top">Rabia Malik</a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="label">React Native Developer · Islamabad, Pakistan</span>
+    <h1>I build mobile apps, from the first screen to the <em>store release.</em></h1>
+    <p class="lede">3+ years building and publishing iOS and Android apps with TypeScript and Redux, including live products that talk to RFID readers, scan receipts and take payments.</p>
+    <div class="actions">
+      <a class="btn primary" href="#work">See my apps</a>
+      <a class="btn" href="https://github.com/Rabiamalik2">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/rabia-malik-mobiledev">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<div class="facts">
+  <div class="wrap">
+    <dl>
+      <div><dt>3+ years</dt><dd>with React Native</dd></div>
+      <div><dt>3 apps</dt><dd>live on the App Store and Google Play</dd></div>
+      <div><dt>50+ screens</dt><dd>revamped on Meal Dynamics</dd></div>
+      <div><dt>1–2 a month</dt><dd>iOS and Android releases I manage</dd></div>
+    </dl>
+  </div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <h2>Apps I've worked on</h2>
+    <div class="apps">
+
+      <article class="app">
+        <div class="tile">
+          <svg viewBox="0 0 240 180" role="img" aria-label="Drawing of a receipt with a scan line passing over it">
+            <path class="s-paper" d="M70 18 H170 V158 L160 150 L150 158 L140 150 L130 158 L120 150 L110 158 L100 150 L90 158 L80 150 L70 158 Z"/>
+            <path class="s-line" d="M84 38 H136"/>
+            <path class="s-line" d="M84 56 H156"/>
+            <path class="s-line" d="M84 72 H148"/>
+            <path class="s-line" d="M84 88 H156"/>
+            <path class="s-line" d="M84 104 H128"/>
+            <path class="s-accent" d="M84 126 H156"/>
+            <g class="scan"><path class="s-signal" d="M54 24 H186"/></g>
+            <text class="s-muted" x="8" y="172" font-size="9">OCR</text>
+          </svg>
+        </div>
+        <div class="app-body">
+          <div>
+            <h3>Meal Dynamics</h3>
+            <p class="who">React Native Developer at Bajco Technologies · Oct 2025 – Present</p>
+          </div>
+          <p>Restaurant and back-office staff use this app to raise, approve and pay for operational requests across locations.</p>
+          <ul>
+            <li>Took over the existing codebase and independently manage the mobile frontend, including deployments and store releases.</li>
+            <li>Revamped the UI and functionality of 50+ screens across repair and maintenance, accounts payable, expenses and asset management.</li>
+            <li>Built receipt scanning for expense requests using the device camera and OCR.</li>
+          </ul>
+          <p class="stack-line">React Native · TypeScript · Redux Toolkit · redux-persist · Realm · Firebase</p>
+          <div class="stores">
+            <a href="https://apps.apple.com/us/app/meal-dynamics/id6738582785">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.mealdynamics.app">Google Play</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="app">
+        <div class="tile">
+          <svg viewBox="0 0 240 180" role="img" aria-label="Drawing of an RFID reader sending signal waves to an asset tag">
+            <rect class="s-paper" x="20" y="62" width="58" height="56" rx="6"/>
+            <circle class="s-accent-fill" cx="49" cy="90" r="9"/>
+            <path class="s-signal wave" d="M92 70 A28 28 0 0 1 92 110"/>
+            <path class="s-signal wave b" d="M108 58 A44 44 0 0 1 108 122"/>
+            <path class="s-signal wave c" d="M124 46 A60 60 0 0 1 124 134"/>
+            <rect class="s-paper" x="160" y="66" width="60" height="48" rx="4"/>
+            <rect class="s-ink" x="170" y="77" width="3" height="26"/>
+            <rect class="s-ink" x="176" y="77" width="6" height="26"/>
+            <rect class="s-ink" x="185" y="77" width="2" height="26"/>
+            <rect class="s-ink" x="190" y="77" width="5" height="26"/>
+            <rect class="s-ink" x="198" y="77" width="3" height="26"/>
+            <rect class="s-ink" x="204" y="77" width="6" height="26"/>
+            <text class="s-muted" x="8" y="172" font-size="9">RFID over Bluetooth</text>
+          </svg>
+        </div>
+        <div class="app-body">
+          <div>
+            <h3>Invoqat</h3>
+            <p class="who">React Native Developer at Adrem Technologies · Aug 2023 – Jul 2025</p>
+          </div>
+          <p>Asset and activity management app with repair and maintenance, inventory and fixed-asset modules.</p>
+          <ul>
+            <li>Integrated Zebra RFID reader SDKs over Bluetooth, including reader pairing and reconnection, so users could scan tags and check whether assets existed in inventory.</li>
+            <li>Revamped the mobile UI across 20+ screens and worked on data filters throughout the app.</li>
+            <li>Worked on NFC tag support alongside RFID scanning.</li>
+          </ul>
+          <p class="stack-line">React Native · TypeScript · Redux · Zebra RFID SDKs · Bluetooth · NFC · Node.js</p>
+          <div class="stores">
+            <a href="https://apps.apple.com/us/app/invoqat/id6714462669">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=app.intuu.io">Google Play</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="app">
+        <div class="tile">
+          <svg viewBox="0 0 240 180" role="img" aria-label="Drawing of a compass marked north, east, south and west">
+            <circle class="s-paper" cx="120" cy="90" r="72"/>
+            <circle class="s-ring" cx="120" cy="90" r="52"/>
+            <text class="s-ink" x="120" y="35" font-size="13" text-anchor="middle">N</text>
+            <text class="s-ink" x="120" y="156" font-size="13" text-anchor="middle">S</text>
+            <text class="s-ink" x="178" y="95" font-size="13" text-anchor="middle">E</text>
+            <text class="s-ink" x="62" y="95" font-size="13" text-anchor="middle">W</text>
+            <g class="needle">
+              <path class="s-signal-fill" d="M120 46 L128 90 H112 Z"/>
+              <path class="s-accent-fill" d="M120 134 L112 90 H128 Z"/>
+            </g>
+            <text class="s-muted" x="8" y="172" font-size="9">Compass</text>
+          </svg>
+        </div>
+        <div class="app-body">
+          <div>
+            <h3>ACMeSIM</h3>
+            <p class="who">React Native Developer at Codistan Ventures · Aug 2025 – Oct 2025</p>
+          </div>
+          <p>eSIM app offering mobile data packages for destinations worldwide.</p>
+          <ul>
+            <li>Worked on Stripe payment integration for package purchases, with separate test and production configurations.</li>
+            <li>Contributed to the app's compass feature.</li>
+          </ul>
+          <p class="stack-line">React Native · TypeScript · Redux · Firebase · Stripe · Git</p>
+          <div class="stores">
+            <a href="https://apps.apple.com/pk/app/acmesim-esim-data-roaming/id6748910980">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.acmesim">Google Play</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Other projects</h2>
+    <div class="two">
+      <article>
+        <h3>Self CheckUp</h3>
+        <p>Health app for recording daily health information, including heart rate and blood pressure, with a ChatGPT-powered assistant for user questions and Node.js APIs backed by MongoDB.</p>
+        <p class="stack-line">React Native · Node.js · Firebase · MongoDB · ChatGPT API</p>
+      </article>
+      <article>
+        <h3>Mehndi Designs &amp; Tutorials</h3>
+        <p>App for browsing mehndi designs and following tutorials with image and video content.</p>
+        <p class="stack-line">React Native</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <ol class="timeline">
+      <li><span class="when">Oct 2025 – Present</span><div><b>Bajco Technologies</b><br>React Native Developer, Islamabad</div></li>
+      <li><span class="when">Aug 2025 – Oct 2025</span><div><b>Codistan Ventures</b><br>React Native Developer, Islamabad</div></li>
+      <li><span class="when">Aug 2023 – Jul 2025</span><div><b>Adrem Technologies</b><br>React Native Developer, Islamabad</div></li>
+      <li><span class="when">Oct 2023 – Jan 2024</span><div><b>Incouriers</b><br>React Native Developer Intern, Remote</div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band" id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <dl class="skills">
+      <div><dt class="label">Mobile</dt><dd>React Native, React.js, iOS and Android publishing</dd></div>
+      <div><dt class="label">Languages and state</dt><dd>TypeScript, JavaScript, Redux Toolkit, Redux Saga, redux-persist</dd></div>
+      <div><dt class="label">Integrations</dt><dd>Zebra RFID SDKs, Bluetooth, NFC, OCR, Stripe</dd></div>
+      <div><dt class="label">Backend and data</dt><dd>Node.js, REST APIs, Firebase, Realm, MongoDB, Google Cloud Platform</dd></div>
+      <div><dt class="label">Tools</dt><dd>VS Code, Xcode, Android Studio, Git, GitHub, Azure DevOps, Microsoft Teams, Figma</dd></div>
+      <div><dt class="label">Education</dt><dd>Master of Computer Science, National University of Modern Languages, Islamabad</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="ai">
+      <h2>How I use AI</h2>
+      <p>I use agentic AI tools, including Claude Code, Cursor and ChatGPT, for development, testing and debugging to deliver faster, better results.</p>
+      <p>I'm also enrolled in the Certified Agentic AI Architect Program (CA3) at PIAIC, Air University, Islamabad.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="contact band" id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <div class="mail">
+      <span id="email">rabiam037@gmail.com</span>
+      <button id="copy-email" type="button">Copy email</button>
+    </div>
+    <div class="stores">
+      <a href="https://www.linkedin.com/in/rabia-malik-mobiledev">LinkedIn</a>
+      <a href="https://github.com/Rabiamalik2">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('copy-email').addEventListener('click', function () {
+    var btn = this;
+    var el = document.getElementById('email');
+    var done = function (text) { btn.textContent = text; setTimeout(function () { btn.textContent = 'Copy email'; }, 1800); };
+    var select = function () {
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+      done('Selected, press copy');
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(el.textContent).then(function () { done('Copied'); }, select);
+    } else {
+      select();
+    }
+  });
+</script>
+</body>
+</html>
